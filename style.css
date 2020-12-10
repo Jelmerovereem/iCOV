@@ -16,3 +16,8 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.example-node {
+	border: 1px solid black;
+	padding: 20px;
+}
