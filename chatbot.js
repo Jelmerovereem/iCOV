@@ -134,6 +134,16 @@ function respond(subject) {
 			<p>Ik ga even voor je zoeken in de database naar <strong>Lex de Haan</strong>!</p>
 		</div>
 	`;
+	let respondLexHtml2 = `
+		<div class="chat-bubble left">
+			<h2>Lex de Haan</h2>
+			<p><strong>Voornaam:</strong> Lex</p>
+			<p><strong>Achternaam:</strong> de Haan</p>
+			<p><strong>Geboortedatum:</strong> 16 Mei 1963 (57 jaar)</p>
+			<p><strong>Gender:</strong> Man</p>
+			<p><strong>Functie:</strong> Manager</p>
+		</div>
+	`;
 	let respondNeenaHtml = `
 		<div class="chat-bubble left">
 			<p>Ik ga even voor je zoeken in de database naar <strong>Neena Kochhar</strong>!</p>
@@ -168,6 +178,10 @@ function respond(subject) {
 		setTimeout(() => {
 			innerContainer.insertAdjacentHTML("beforeend", respondLexHtml);
 			scrollDown();
+			setTimeout(() => {
+				innerContainer.insertAdjacentHTML("beforeend", respondLexHtml2);
+				scrollDown();
+			}, 1000)
 		}, 1000)
 	}
 	if (subject === "Nina") {
