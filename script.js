@@ -37,7 +37,7 @@ let nodesArray = nodes.NetworkNodes.Nodes.Node;
 
 
 edges.NetworkEdges.EdgeSets.EdgeSet.forEach((line, index) => {
-  /*console.log(index, line)*/
+  console.log(index, line)
   if (Array.isArray(line.EdgesInSet.Edge)) {
     var fromNodeObj = nodesArray.find((obj) => {
       return obj.SID === line.EdgesInSet.Edge[0].FromNodeSID
