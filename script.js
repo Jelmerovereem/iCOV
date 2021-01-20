@@ -327,8 +327,12 @@ function checkIcons(obj) {
 
 function checkSaved(SID) {
   const savedNodes = JSON.parse(localStorage.getItem("savedNodes"));
-  if (savedNodes.includes(SID)) {
-    return `<a href="javascript:void(0)" data-SID="${SID}" data-saved="true" class="saveNode nodeIsSaved"><img src="assets/savedPin.svg">Opgeslagen</a>`
+  if (savedNodes) {
+    if (savedNodes.includes(SID)) {
+      return `<a href="javascript:void(0)" data-SID="${SID}" data-saved="true" class="saveNode nodeIsSaved"><img src="assets/savedPin.svg">Opgeslagen</a>`
+  } else {
+      return `<a href="javascript:void(0)" data-SID="${SID}" data-saved="false" class="saveNode"><img src="assets/savePin.svg">Opslaan</a>`
+  }
   } else {
     return `<a href="javascript:void(0)" data-SID="${SID}" data-saved="false" class="saveNode"><img src="assets/savePin.svg">Opslaan</a>`
   }
