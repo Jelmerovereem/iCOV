@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>iCOV Tables</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+		<div class="allNodes">
+		<h2>Nodes</h2>
+		<div class="example-node">
+			<p><strong>Voorbeeld Node:</strong></p>
+		</div>
+		<table class="nodesTable">
+			<tbody>
+				<tr>
+					<th>Nr</th>
+					<th>Label</th>
+					<th>NodeSID</th>
+					<!-- <th>NodeID</th> -->
+					<!-- <th>NodeType</th> -->
+					<th>SubNodeID</th>
+					<th>Crimineel verleden</th>
+					<th>Slachtoffer</th>
+					<th>Snelle bezittingen</th>
+					<th>Dure bezittingen</th>
+					<th>Gemeentelijke relatie</th>
+					<th>Non profit organisatie</th>
+				</tr>
+			</tbody>
+		</table>
+		<a href="javascript:void(0)" class="saveNodes">Save</a>
+	</div>
+	<div class="network">
+		<h2>Edges / connectie</h2>
+		<img src="assets/legenda.png" alt="">
+		<table>
+			<tbody>
+				<tr>
+					<th>Nr</th>
+					<th>Van Node</th>
+					<th>Naar Node</th>
+					<th>Verband</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="data/nodes.js"></script>
+	<script src="data/anb.js"></script>
+	<script src="data/edges.js"></script>
+	<script src="script.js"></script>
+	<script src="scripts/tables.js"></script>
+</body>
+</html>
