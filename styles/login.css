@@ -1,0 +1,101 @@
+body {
+	background: url(../assets/loginBackground.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow-y: hidden;
+}
+
+main {
+	height: 100vh;
+}
+
+.loginContainer {
+	display: grid;
+	grid-template-columns: 70% auto;
+	grid-template-rows: 15% auto;
+	grid-gap: 5px;
+	width: 60%;
+	height: 40%;
+	margin: auto;
+	margin-top: 200px;
+}
+
+h2 {
+	margin: 0;
+    /*padding: 10px;*/
+}
+
+.upperRow {
+	background: black;
+}
+
+.underRow {
+	background: #0A0A0A;
+	position: relative;
+}
+
+.loginTop {
+	position: relative;
+}
+
+.loginTop h2 {
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	transform: translateY(-50%);
+	font-weight: lighter;
+    text-transform: uppercase;
+}
+
+.innerContainer {
+	width: 60%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.innerContainer label {
+	color: white;
+	margin-right: 50px;
+}
+
+.searchBtn {
+	text-decoration: none;
+	display: block;
+	margin-left: 36%;
+	margin-top: 20px;
+	text-align: center;
+	width: 20%;
+	padding: 10px 20px;
+	color: white;
+	border: 1px solid #535353;
+	border-radius: 10px;
+}
+
+.personScanInfo {
+	color: white;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.personScanInfo table tr:first-child td {
+	padding-bottom: 30px;
+}
+
+.personScanInfo table tr td:first-child {
+	padding-right: 25px;
+}
+
+.personScanInfo a {
+	display: block;
+	color: white;
+	text-decoration: none;
+	padding: 10px 15px;
+	background: #535353;
+	border-radius: 10px;
+	text-align: center;
+	width: 60%;
+	margin: auto;
+	margin-top: 35px;
+}
