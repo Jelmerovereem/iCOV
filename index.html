@@ -4,10 +4,51 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
-	<a href="scan.html">naar visualisatie</a>
-	<script></script>
+	<div class="topbar">
+		<h2>iCOV</h2>
+	</div>
+	<main>
+		<div class="loginContainer">
+			<div class="upperRow loginTop">
+				<h2>Relatiescan opvragen</h2>
+			</div>
+			<div class="upperRow"></div>
+			<div class="underRow">
+				<div class="innerContainer">
+					<label for="bsn">BSN Nummer</label>
+					<input type="text" name="bsn" placeholder="012345678">
+					<a href="javascript:void(0)" class="searchBtn">Zoeken</a>
+				</div>
+			</div>
+			<div class="underRow">
+				<div class="innerContainer personScanInfo">
+					<table>
+						<tr>
+							<td>BSN Nummer</td>
+							<td>012345678</td>
+						</tr>
+						<tr>
+							<td>Voornaam:</td>
+							<td>Steven</td>
+						</tr>
+						<tr>
+							<td>Achternaam:</td>
+							<td>King</td>
+						</tr>
+						<tr>
+							<td>Geboortedatum:</td>
+							<td>08-04-1955</td>
+						</tr>
+					</table>
+					<a href="scan.html">Scan uitvoeren</a>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="scripts/login.js"></script>
 </body>
 </html>
