@@ -8,6 +8,7 @@ body {
 	font-family: roboto;
 	background: #131112;
 	margin: 0;
+	overflow-x: hidden;
 }
 
 .topbar {
@@ -15,14 +16,40 @@ body {
 	text-align: center;
 	background: black;
 	height: 50px;
-	display: flex;
+	position: relative;
+	/*display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: center;*/
+}
+
+.topbar>div {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 50px;
+	float: left;
+	color: white;
+	display: flex;
+}
+
+.topbar>div img {
+	display: block;
+	align-self: center;
+	margin-right: 10px;
+}
+
+.topbar>div p {
+	margin: 0;
+	text-align: left;
 }
 
 .topbar h2 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	margin: 0;
-	font-weight: 300;
+	font-weight: 500;
 	font-size: 36px;
 	background: -webkit-linear-gradient(left, #FFDF6C, #854A4A, #313A7E);
 	-webkit-background-clip: text;
@@ -41,15 +68,28 @@ h2 {
 	color: white;
 }
 
-.openLegenda {
-	width: 45px;
-	height: 45px;
+.selectionArea {
+	position: fixed;
+	left: 20px;
+	top: 60px;
+	display: flex;
+	color: white;	
+}
+
+.openLegenda, .openSelectionArea {
+	width: 49px;
+	height: 49px;
 	display: block;
 	position: relative;
 	margin-right: 20px;
 }
 
-.legendaContainer .openIcon {
+.openSelectionArea {
+	margin-right: 0;
+	margin-left: 20px;
+}
+
+.legendaContainer .openIcon, .openSelectionArea>img {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -67,11 +107,17 @@ h2 {
 	width: 300px;
 }
 
+.selectionSideBar {
+	display: none;
+	margin-left: 0;
+	width: 300px;
+}
+
 .activeSideBar {
 	display: block;
 }
 
-.legendaTitleBar, .legendaContainer>a {
+.legendaTitleBar, .legendaContainer>a, .openSelectionArea {
 	background: #0A0A0A;
 	/*margin: 10px;*/
 }
@@ -79,6 +125,7 @@ h2 {
 .legendaTitleBar {
 	/*width: 100%;*/
 	padding: 10px 0 10px 10px;
+	margin-bottom: 10px;
 }
 
 .legendaTitleBar h2 {
@@ -110,6 +157,10 @@ h2 {
 	transition: transform .5s;
 }
 
+.selectionArea .accordionTab:after {
+	right: 80px;
+}
+
 .detailAccordionTab:after, .savedAccordionTab:after {
 	right: 25px;
 }
@@ -121,7 +172,7 @@ h2 {
 .accordionPanel {
 	max-height: 0;
 	overflow: hidden;
-	transition: max-height 0.2s ease-out;
+	transition: max-height 0.2s ease-out, padding .5s;
 	background: #0A0A0A;
 }
 
@@ -210,6 +261,10 @@ input:checked + .slider:before {
 	border-radius: 50%;
 }
 
+div.thirdSwitchLayerContainer {
+	margin-bottom: 25px;
+}
+
 .savedNodesContainer {
 	width: 300px;
 	position: fixed;
@@ -257,7 +312,7 @@ ul {
 .personPopup {
 	width: /*fit-content*/ 1000px;
 	height: auto;
-	padding: 10px;
+	/*padding: 10px;*/
 	/*background: #0A0A0A;*/
 	position: absolute;
 	transition: opacity 1s;
