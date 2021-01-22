@@ -7,7 +7,7 @@ const graphMargin = {
 };
 
 const width = 1920 - graphMargin.left - graphMargin.right;
-const height = 800 - graphMargin.top - graphMargin.bottom;
+const height = 1000 - graphMargin.top - graphMargin.bottom;
 
 const svg = d3.select("#networkGraph")
     .append("svg")
@@ -108,40 +108,6 @@ const susAmount = 3;
 let node = svg.append("g")
     .attr("class", "node")
     .selectAll("path")
-/*.data(nodes.NetworkNodes.Nodes.Node)
-.enter()
-.append("g")
-  .attr("class", "groupNode")
-.append("path")
-  .attr("d", checkNode)
-  .attr("transform", function(d){return `translate(${d.x}, ${d.y})`;})
-  .attr("fill", (obj) => {
-    if (obj.CriminalHistory) {
-      return "#FFDD64"
-    } else if (obj.PossibleMoneyLaundering) {
-      return "#F75C03"
-    } else {
-      return "#C4C4C4"
-    }
-  })
-  .attr("class", function(d) {
-    let allClasses = "";
-    d.CriminalHistory ? allClasses += " criminalNode" : "";
-    d.QuickPossessions ? allClasses += " quickPos topExtra" : "";
-    d.ExpensivePossessions > susAmount ? allClasses += " expensivePos topExtra" : "";
-    d.Authority ? allClasses += " authority bottomExtra" : "";
-    d.TownshipRelation ? allClasses += " township bottomExtra" : "";
-    allClasses ? allClasses += " extra" : "";
-    return allClasses
-  })
-  .attr("fill-rule", "evenodd")
-  .attr("clip-rule", "evenodd")
-  .on("click", openPerson)
-  .on("mouseover", hoverPerson)
-  .on("mouseout", hoverOutPerson)
-  .call(d3.drag().on("start", dragStarted).on("drag", dragged).on("end", dragEnded))*/
-
-/*invalidation.then(() => simulation.stop())*/
 
 function updateChart(nodes, links) {
     const old = new Map(node.data().map(d => [d.id, d]));
@@ -411,6 +377,45 @@ allSwitches.forEach((switchInput) => {
                     updateChart(updatedNodes, edges.NetworkEdges.EdgeSets.EdgeSet)
           }
         }
+        if (this.name === "employee") {
+            if (!this.checked) {
+                updatedNodes = updatedNodes.filter((obj) => {
+                    if (obj.NodeID === "PEOPLE") {
+                        if (obj.SubNodeID != "SEN_FEMALE_EMPLOYEE" && obj.SubNodeID != "YOUNG_FEMALE_EMPLOYEE" && obj.SubNodeID != "YOUNG_MALE_EMPLOYEE" && obj.SubNodeID != "SEN_MALE_EMPLOYEE") {
+                            return obj
+                        }
+                    } else {
+                        return obj
+                    }
+                })
+
+                let allEmployees = nodes.NetworkNodes.Nodes.Node.filter(obj => obj.SubNodeID === "SEN_FEMALE_EMPLOYEE" || obj.SubNodeID === "YOUNG_FEMALE_EMPLOYEE" || obj.SubNodeID === "YOUNG_MALE_EMPLOYEE" || obj.SubNodeID === "SEN_MALE_EMPLOYEE");
+                let allEmployeesSIDs = [];
+                allEmployees.forEach((employee) => {
+                    allEmployeesSIDs.push(employee.SID);
+                })
+
+                updatedEdges = updatedEdges.filter((obj) => {
+                    if (allEmployeesSIDs.indexOf(obj.FromNodeSID && obj.ToNodeSID)) {
+                        return obj
+                    }
+                })
+
+                updateChart(updatedNodes, updatedEdges)
+            } else if (this.checked) {
+                let allEmployees = nodes.NetworkNodes.Nodes.Node.filter(obj => obj.SubNodeID === "SEN_FEMALE_EMPLOYEE" || obj.SubNodeID === "YOUNG_FEMALE_EMPLOYEE" || obj.SubNodeID === "YOUNG_MALE_EMPLOYEE" || obj.SubNodeID === "SEN_MALE_EMPLOYEE");
+                allEmployees.forEach((employee) => {
+                    updatedNodes.push(employee)
+                })
+
+                updatedNodes = Array.from(new Set(updatedNodes.map(a => a.SID)))
+                    .map(SID => {
+                        return updatedNodes.find(a => a.SID === SID)
+                    })
+
+                    updateChart(updatedNodes, edges.NetworkEdges.EdgeSets.EdgeSet)
+            }
+        }
     })
 })
 
@@ -458,14 +463,13 @@ const paths = groups.selectAll(".path_placeholder")
     .append("g")
     .attr("class", "path_placeholder")
     .append("path")
-    //.attr("stroke", "green")
     .attr("fill", "#313A7E")
     .attr("opacity", 0);
 
 paths
     .transition()
     .duration(2000)
-    .attr("opacity", 1)
+    .attr("opacity", .6)
 
 groups.selectAll(".path_placeholder")
     .call(d3.drag()
@@ -594,6 +598,7 @@ function getAddressData(SID) {
 function openPerson(event, obj) {
     console.log(obj)
     personPopup.style.display = "block";
+    personPopup.style.padding = "10px";
 
     function getColor() {
         if (obj.CriminalHistory) {
@@ -688,7 +693,7 @@ function openPerson(event, obj) {
         </div>
       </div>
       <div class="betweenBar">
-        <div class="criminalSwitchContainer">(switch)<input type="checkbox" name="" id="">Crimineel verleden</div>
+        <div class="criminalSwitchContainer"><label class="switch" style="float: left; margin-right: 5px;"><input type="checkbox" checked><span class="slider round"></span></label>Crimineel verleden</div>
         <div class="saveContainer">${checkSaved(obj.SID)}</div>
       </div>
       <div class="personInfo">
@@ -748,7 +753,12 @@ function openPerson(event, obj) {
       <div class="detailAccordionContainer">
         <a href="javascript:void(0)" class="detailAccordionTab">Gegevens</a>
         <div class="detailAccordionPanel">
-          <p>Content</p>
+            <div class="betweenBar" style="background: #0A0A0A; padding: 10px;">
+                <img src="assets/selectPeriodBtn.png" alt="">
+            </div>
+            <div style="background: #0A0A0A; width: 100%;">
+                <img src="assets/gegevens.png" alt="">
+            </div>
         </div>
       </div>
       `;
@@ -763,7 +773,7 @@ function openPerson(event, obj) {
         </div>
       </div>
       <div class="betweenBar">
-        <div class="criminalSwitchContainer">(switch)<input type="checkbox" name="" id="">Verdacht bedrijf</div>
+        <div class="criminalSwitchContainer"><label class="switch" style="float: left; margin-right: 5px;"><input type="checkbox" checked><span class="slider round"></span></label>Verdacht bedrijf</div>
         <div class="saveContainer">${checkSaved(obj.SID)}</div>
       </div>
       <div class="personInfo">
@@ -790,7 +800,7 @@ function openPerson(event, obj) {
         </div>
       </div>
       <div class="betweenBar">
-        <div class="criminalSwitchContainer">(switch)<input type="checkbox" name="" id="">Verdacht adres</div>
+        <div class="criminalSwitchContainer"><label class="switch" style="float: left; margin-right: 5px;"><input type="checkbox" checked><span class="slider round"></span></label>Verdacht adres</div>
         <div class="saveContainer">${checkSaved(obj.SID)}</div>
       </div>
       <div class="personInfo">
@@ -800,7 +810,16 @@ function openPerson(event, obj) {
           </table>
         </div>
         <div class="rightColumn departmentRightColumn">
-          <p>lol</p>
+          <table>
+            <tr>
+                <td>Aantal bewoners:</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Datum:</td>
+                <td>2008 - heden</td>
+            </tr>
+          </table>
         </div>
       </div>
     `;
@@ -847,11 +866,10 @@ const hoverPopupContainer = document.querySelector(".hoverPopupContainer");
 const hoverPopup = document.querySelector(".hoverPopup");
 
 function hoverPerson(event, obj) {
-    hoverPopupContainer.style.left = `${event.pageX + 10}px`;
-    hoverPopupContainer.style.top = `${event.pageY - 10}px`;
+    hoverPopupContainer.style.left = `${event.pageX + 15}px`;
+    hoverPopupContainer.style.top = `${event.pageY - 50}px`;
+    hoverPopupContainer.style.height = "20px";
     hoverPopup.innerHTML = `${obj.Label}`;
-    //hoverPopup.style.left = `${event.pageX + 10}px`;
-    //hoverPopup.style.top = `${event.pageY - 10}px`;
     hoverPopup.style.background = `${d3.select(event.target).attr("fill")}`;
     hoverPopup.classList.add("hoverPopupActive")
 }
@@ -1048,7 +1066,7 @@ function group_dragended(dragevent, groupId) {
 // src = https://www.d3-graph-gallery.com/graph/network_basic.html
 
 
-//Open & Close Legenda
+//Open & Close Legenda & Selection
 
 const openCloseBtn = document.querySelector(".openLegenda");
 const legendaSideBar = document.querySelector(".legendaSideBar");
@@ -1059,6 +1077,16 @@ function toggleLegenda() {
 }
 
 openCloseBtn.addEventListener("click", toggleLegenda);
+
+const openSelectionBtn = document.querySelector(".openSelectionArea");
+const selectionSideBar = document.querySelector(".selectionSideBar");
+
+function toggleSelectionArea() {
+    selectionSideBar.classList.toggle("activeSideBar");
+    openSelectionBtn.querySelector(".openIcon").classList.toggle("activeIcon");
+}
+
+openSelectionBtn.addEventListener("click", toggleSelectionArea);
 
 //accordions
 const accordions = document.querySelectorAll(".accordionTab");
