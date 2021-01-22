@@ -9,8 +9,92 @@
 	</head>
 	<body>
 		<!-- <a href="chatbot.html">Chatbot</a> -->
+		<div class="topbar">
+			<div>
+				<img src="assets/topbarPerson.png" alt="">
+				<div>
+				<p>BSN: <strong>012345678</strong></p>
+				<p>Naam: <strong>Steven King</strong></p>
+				</div>
+			</div>
+			<h2>iCOV</h2>
+		</div>
 		<div class="personPopup"></div>
 		<div class="hoverPopupContainer"><div class="hoverPopup"></div></div>
+		<div class="selectionArea">
+			<div class="selectionSideBar activeSideBar">
+				<div class="selectionTitleBar legendaTitleBar">
+					<h2>Selectiegebied</h2>
+				</div>
+				<div class="accordionContainer">
+					<a href="javascript:void(0)" class="accordionTab">Periode</a>
+					<div class="accordionPanel">
+						<input type="range">
+					</div>
+				</div>
+				<div class="accordionContainer">
+					<a href="javascript:void(0)" class="accordionTab">Relatieweergave</a>
+					<div class="accordionPanel">
+						<div>
+							<span>1e laag</span>
+							<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+						</div>
+						<div>
+							<span>2e laag</span>
+							<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+						</div>
+						<div class="thirdSwitchLayerContainer">
+							<span>3e laag</span>
+							<label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+						</div>
+						<div>
+							<span>Alleen overlappende groepen</span>
+							<label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+						</div>
+						<div>
+							<span>Alleen opgeslagen personen</span>
+							<label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+						</div>
+					</div>
+				</div>
+				<div class="accordionContainer">
+					<a href="javascript:void(0)" class="accordionTab">Type relatielijn</a>
+					<div class="accordionPanel">
+						<div>
+							<div>
+								<img src="assets/criminalLine.png" alt="">
+								<span>Crimineel</span>
+							</div>
+							<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+						</div>
+						<div>
+							<div>
+								<img src="assets/workLine.png" alt="">
+								<span>Werk</span>
+							</div>
+							<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+						</div>
+						<div>
+							<div>
+								<img src="assets/familyLine.png" alt="">
+								<span>Familie</span>
+							</div>
+							<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+						</div>
+						<div>
+							<div>
+								<img src="assets/othersLine.png" alt="">
+								<span>Overige</span>
+							</div>
+							<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="javascript:void(0)" class="openSelectionArea">
+				<img src="assets/arrow.svg" class="openIcon" alt="">
+			</a>
+		</div>
 		<div class="legendaContainer">
 			<a href="javascript:void(0)" class="openLegenda">
 				<img src="assets/arrow.svg" class="openIcon activeIcon" alt="">
@@ -168,9 +252,6 @@
 			<div class="accordionPanel savedNodesPanel">
 				
 			</div>
-		</div>
-		<div class="topbar">
-			<h2>iCOV</h2>
 		</div>
 		<div id="networkGraph">
 			
