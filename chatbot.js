@@ -80,11 +80,11 @@ function sendSpeechMsg(name) {
 	if (name === "Lex") {
 		innerContainer.insertAdjacentHTML("beforeend", lexHtml);
 		scrollDown();
-		respond(name);
+		respond("lex");
 	} else if (name === "Nina") {
 		innerContainer.insertAdjacentHTML("beforeend", neenaHtml);
 		scrollDown();
-		respond(name);
+		respond("neena");
 	} else {
 		innerContainer.insertAdjacentHTML("beforeend", onbekendHtml);
 		scrollDown();
@@ -123,9 +123,9 @@ function respond(subject) {
 	`;
 	let respondMeerRelaties = `
 		<div class="chat-bubble left">
-			<input type="radio" id="neena" value="neena">
+			<input type="radio" id="neena" name="chat-option" value="neena">
 			<label for="neena">Neena Kochhar</label>
-			<input type="radio" id="lex" value="lex">
+			<input type="radio" id="lex" name="chat-option" value="lex">
 			<label for="lex">Lex de Haan</label>
 		</div>
 	`;
@@ -174,7 +174,7 @@ function respond(subject) {
 			scrollDown();
 		}, 1000)
 	}
-	if (subject === "Lex") {
+	if (subject === "lex") {
 		setTimeout(() => {
 			innerContainer.insertAdjacentHTML("beforeend", respondLexHtml);
 			scrollDown();
@@ -184,7 +184,7 @@ function respond(subject) {
 			}, 1000)
 		}, 1000)
 	}
-	if (subject === "Nina") {
+	if (subject === "neena") {
 		setTimeout(() => {
 			innerContainer.insertAdjacentHTML("beforeend", respondNeenaHtml);
 			scrollDown()
